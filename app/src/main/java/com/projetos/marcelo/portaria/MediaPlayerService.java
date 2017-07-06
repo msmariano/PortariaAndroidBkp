@@ -5,14 +5,17 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
 import android.media.session.MediaSessionManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -96,9 +99,11 @@ public class MediaPlayerService extends Service {
         builder.setTicker("this is ticker text");
 
 
+        Thread cThreadOnline = new Thread(new ClientThreadOnline());
+        cThreadOnline.start();
 
-        builder.setVibrate(new long[]{100, 250, 100, 500});
-        builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        /*builder.setVibrate(new long[]{100, 250, 100, 500});
+        builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));*/
         builder.addAction(action);
         style.setShowActionsInCompactView(0);
 
@@ -111,8 +116,63 @@ public class MediaPlayerService extends Service {
 
         public void run()
         {
+              while(true){
+                    try {
+                        Thread.sleep(10000);
+                    } catch (Exception e) {
+                    }
+                    //showNotification();
+
+
+                   Log.i("SERVICE", "Service running");
+
+                }
 
         }
+    }
+
+    private void showNotification() {
+
+
+        Notification myNotication;
+
+        Bundle yesBundle = new Bundle();
+
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        Intent intent = new Intent("com.example.marcelo.controleremoto");
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, 0);
+
+
+        Notification.Builder builder = new Notification.Builder(this);
+        //builder.addAction(0, "Atender", pendingIntentAtender);
+
+
+        builder.setAutoCancel(false);
+        builder.setTicker("this is ticker text");
+        builder.setContentTitle("Portaria");
+        builder.setContentText("Tocando campainha.Por favor atenda!");
+
+        yesBundle.putInt("userAnswer", 1);//This is the value I want to pass
+        intent.putExtras(yesBundle);
+        intent.setAction("call_method");
+        PendingIntent pendingIntentAtender = PendingIntent.getBroadcast(this, 12345, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.addAction(0, "Atender", pendingIntentAtender);
+
+        builder.setSmallIcon(R.drawable.chat1);
+        builder.setContentIntent(pendingIntent);
+        builder.setOngoing(true);
+        builder.setSubText("Atenção...");   //API level 16
+        builder.setNumber(100);
+        builder.setVibrate(new long[]{100, 250, 100, 500});
+        builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+
+
+        builder.build();
+
+
+        myNotication = builder.getNotification();
+        manager.notify(11, myNotication);
     }
 
     public class ClientThread implements Runnable
@@ -218,8 +278,7 @@ public class MediaPlayerService extends Service {
 
 
 
-                                     Thread cThreadOnline = new Thread(new ClientThreadOnline());
-                                     cThreadOnline.start();
+
 
 
                                     /* new Thread(new Runnable() {

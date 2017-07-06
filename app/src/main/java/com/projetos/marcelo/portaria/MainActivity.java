@@ -87,12 +87,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        /*if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
-        }*/
+        }
 
-        //Toast.makeText(context, IMEI, Toast.LENGTH_SHORT).show();
-        //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Toast.makeText(context, IMEI, Toast.LENGTH_SHORT).show();
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         mydatabase = openOrCreateDatabase("portaria.db", MODE_PRIVATE, null);
         mydatabase.execSQL("CREATE TABLE IF NOT EXISTS TutorialsPoint(Username VARCHAR,Password VARCHAR);");

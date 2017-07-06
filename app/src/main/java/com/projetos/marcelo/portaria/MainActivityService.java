@@ -128,10 +128,10 @@ public class MainActivityService extends Service {
             @Override
             public void run() {
 
-                showNotification();
+
                 //Your logic that service will perform will be placed here
                 //In this example we are just looping and waits for 1000 milliseconds in each loop.
-                for (int i = 0; i < 10; i++) {
+                /*for (int i = 0; i < 10; i++) {
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
@@ -140,9 +140,17 @@ public class MainActivityService extends Service {
                     if(isRunning){
                         Log.i(TAG, "Service running");
                     }
+                }*/
+                while(isRunning) {
+                    try {
+                        Thread.sleep(10000);
+                        showNotification();
+                    } catch (Exception e) {
+                    }
+                    manager.cancel(11);
                 }
 
-                manager.cancel(11);
+
                 //Stop service once it finishes its task
                 stopSelf();
             }

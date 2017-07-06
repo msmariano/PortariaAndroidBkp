@@ -1,4 +1,4 @@
-#Thu Jul 06 15:39:16 BRT 2017
+#Thu Jul 06 16:42:40 BRT 2017
 base.0=/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_2a715e84a36971b8e68683a32463c02eb733a171
 renamed.1=classes2.dex
 renamed.0=classes.dex

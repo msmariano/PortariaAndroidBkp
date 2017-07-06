@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Jul 06 15:39:09 BRT 2017
+#Thu Jul 06 16:42:31 BRT 2017
 122.file=/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/resources-debug.ap_/res/drawable/chat.png
 60.set=ANDROID_RESOURCE
 129.file=/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/resources-debug.ap_/res/anim/abc_fade_out.xml

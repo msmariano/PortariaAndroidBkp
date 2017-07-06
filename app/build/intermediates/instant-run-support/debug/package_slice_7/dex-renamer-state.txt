@@ -1,4 +1,4 @@
-#Thu Jul 06 15:39:16 BRT 2017
+#Thu Jul 06 16:42:40 BRT 2017
 base.0=/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7
 renamed.0=classes.dex
 file.0=/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex

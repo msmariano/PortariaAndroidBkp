@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Jul 06 15:39:17 BRT 2017
+#Thu Jul 06 16:42:40 BRT 2017
 122.file=/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/resources-debug.ap_/res/color-v11/abc_background_cache_hint_selector_material_dark.xml
 60.set=ANDROID_RESOURCE
 129.file=/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/resources-debug.ap_/res/drawable/bell.png
