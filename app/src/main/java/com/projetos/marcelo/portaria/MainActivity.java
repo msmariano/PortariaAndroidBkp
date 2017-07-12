@@ -78,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (ContextCompat.checkSelfPermission(this,
+        /*if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, 0);
-        }
+        }*/
 
        // Toast.makeText(context, IMEI, Toast.LENGTH_SHORT).show();
         //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -185,60 +185,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        locationListenerGps = new LocationListener() {
-            public void onLocationChanged(Location location) {
-                float[] dist = new float[1];
-                dist[0] = 0;
-                if (!bGpsFirst) {
-                    bGpsFirst = true;
-                    org = new Location("Org");
-                    dLatitude = location.getLatitude();
-                    dLongitude = location.getLongitude();
-                    org.setLongitude(dLongitude);
-                    org.setLatitude(dLatitude);
 
-                    textView4.setText("Latitude Org: " + dLatitude);
-                    textView5.setText("Longitude Org:" + dLongitude);
 
-                }
-                Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(), location.getLongitude(), dist);
-
-                textView.setText("Distancia Origem:" + String.valueOf(org.distanceTo(location)));
-                textView2.setText("Latitude: "
-                        + Location.convert(location.getLatitude(), Location.PARCELABLE_WRITE_RETURN_VALUE));
-                textView3.setText("Longitude:"
-                        + Location.convert(location.getLongitude(), Location.PARCELABLE_WRITE_RETURN_VALUE));
-
-                // timer1.cancel();
-                // locationResult.gotLocation(location);
-                // lm.removeUpdates(this);
-                // lm.removeUpdates(locationListenerNetwork);
-            }
-
-            public void onProviderDisabled(String provider) {
-                Toast toast = Toast.makeText(context, "GPS Desativado!", Toast.LENGTH_SHORT);
-                toast.show();
-
-            }
-
-            public void onProviderEnabled(String provider) {
-                Toast toast = Toast.makeText(context, "GPS Ativado!", Toast.LENGTH_SHORT);
-                toast.show();
-
-            }
-
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-        };
-
-        try {
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGps);
-
-        } catch (Exception e) {
-            showMessage(e.getMessage());
-        }
 
     }
 
@@ -371,8 +319,8 @@ public class MainActivity extends AppCompatActivity {
             }
             case MY_PERMISSIONS_ACCESS_FINE_LOCATION: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGps);
+                    //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGps);
 
                     Toast toast = Toast.makeText(context, "GPS Requesitado!", Toast.LENGTH_SHORT);
                     toast.show();
