@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.media.MediaPlayer;
@@ -47,6 +48,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class MediaPlayerService extends Service implements LocationListener {
+	boolean isInit = false;
 	boolean isAct = false;
 	StringBuilder sb = new StringBuilder();
 	public static final String ACTION_PLAY = "action_play";
@@ -120,7 +122,7 @@ public class MediaPlayerService extends Service implements LocationListener {
 				dist[0] = 0;
 				Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(), location.getLongitude(), dist);
 				if (dist[0] > 100) {
-					builder.setColor(10);
+					builder.setColor(Color.BLUE);
 					builder.setContentTitle("Controle Remoto Ativado");
 					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
 					isAct = true;
@@ -175,62 +177,15 @@ public class MediaPlayerService extends Service implements LocationListener {
 		Intent intent = new Intent(getApplicationContext(), MediaPlayerService.class);
 		intent.setAction(ACTION_STOP);
 		PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 1, intent, 0);
-		builder = new Notification.Builder(this).setSmallIcon(R.drawable.ic_launcher2).setColor(0)
-				.setContentTitle("Controle Remoto").setContentText("").setDeleteIntent(pendingIntent).setStyle(style);
-		builder.setTicker("this is ticker text");
-		try {
-			if (ContextCompat.checkSelfPermission(getApplicationContext(),
-					android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-				updateContext("GPS Permitido");
-				locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-				updateContext("Iniciando GPS!");
-				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER/* GPS_PROVIDER */, 1000, 1,
-						this);
-				if (locationManager != null) {
-					Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-					if (location != null) {
-						Geocoder geocoder;
-						List<Address> addresses;
-						geocoder = new Geocoder(this, Locale.getDefault());
-						try {
-							addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-							addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-							String rua = "";
-							String numero = "";
-							if (addresses.get(0).getThoroughfare() != null)
-								rua = addresses.get(0).getThoroughfare();
-							if (addresses.get(0).getSubThoroughfare() != null)
-								numero = addresses.get(0).getSubThoroughfare();
-							sb.append(rua + " " + numero);
-							updateContext(rua + " " + numero);
+		builder = new Notification.Builder(this)
+				.setSmallIcon(R.drawable.ic_launcher2)
+				.setColor(0)
+				.setContentTitle("Controle Remoto")
+				.setContentText("")
+				.setDeleteIntent(pendingIntent)
+				.setStyle(style)
+				.addAction(action);
 
-							Address address = geocoder.getFromLocationName("rua cyro vellozo 56", 1).get(0);
-							dLatitude = address.getLatitude();
-							dLongitude = address.getLongitude();
-
-							float[] dist = new float[1];
-							dist[0] = 0;
-							Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(),
-									location.getLongitude(), dist);
-							updateContext("Distancia.: " + dist[0]);
-
-						} catch (IOException e) {
-							updateContext("Erro ao localizar : " + e.getMessage());
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			updateContext(e.getMessage());
-		}
-
-		/*
-		 * builder.setVibrate(new long[]{100, 250, 100, 500});
-		 * builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.
-		 * TYPE_NOTIFICATION));
-		 */
-		builder.addAction(action);
 		style.setShowActionsInCompactView(0);
 		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(1, builder.build());
@@ -354,6 +309,7 @@ public class MediaPlayerService extends Service implements LocationListener {
 			@Override
 			public void onPause() {
 				super.onPause();
+				//buildNotification(generateAction(android.R.drawable.ic_media_pause, "Pause", ACTION_PLAY));
 				Thread cThread = new Thread(new ClientThread());
 				cThread.start();
 			}
@@ -362,6 +318,7 @@ public class MediaPlayerService extends Service implements LocationListener {
 			public void onPlay() {
 				super.onPlay();
 				buildNotification(generateAction(android.R.drawable.ic_media_play, "Play", ACTION_PAUSE));
+				inicializacao();
 			}
 
 			@Override
@@ -383,11 +340,63 @@ public class MediaPlayerService extends Service implements LocationListener {
 		Notification.Builder mBuilder= new Notification.Builder(this)
 				.setSmallIcon(R.drawable.aviso)
 				.setContentTitle(title)
+				.setColor(Color.RED)
 				.setAutoCancel(true)
 				.setContentText(content)
 				.setContentIntent(PendingIntent.getActivity(this, 0, new Intent(), 0));
 		NotificationManager notificationManager= (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(11, mBuilder.build());
 
+	}
+	public void inicializacao(){
+		/*if(isInit)
+			return;
+		isInit = true;*/
+		try {
+			if (ContextCompat.checkSelfPermission(getApplicationContext(),
+					android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+				updateContext("GPS Permitido");
+				locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+				updateContext("Iniciando GPS!");
+				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER/* GPS_PROVIDER */, 1000, 1,
+						this);
+				if (locationManager != null) {
+					Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+					if (location != null) {
+						Geocoder geocoder;
+						List<Address> addresses;
+						geocoder = new Geocoder(this, Locale.getDefault());
+						try {
+							addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+							addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+							String rua = "";
+							String numero = "";
+							if (addresses.get(0).getThoroughfare() != null)
+								rua = addresses.get(0).getThoroughfare();
+							if (addresses.get(0).getSubThoroughfare() != null)
+								numero = addresses.get(0).getSubThoroughfare();
+							sb.append(rua + " " + numero);
+							updateContext(rua + " " + numero);
+
+							Address address = geocoder.getFromLocationName("rua cyro vellozo 56", 1).get(0);
+							dLatitude = address.getLatitude();
+							dLongitude = address.getLongitude();
+
+							float[] dist = new float[1];
+							dist[0] = 0;
+							Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(),
+									location.getLongitude(), dist);
+							updateContext("Distancia.: " + dist[0]);
+
+						} catch (IOException e) {
+							updateContext("Erro ao localizar : " + e.getMessage());
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			updateContext(e.getMessage());
+		}
 	}
 }
