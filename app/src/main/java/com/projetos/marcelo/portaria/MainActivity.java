@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton IbOnOff;
     ImageButton IbCamera;
     ImageButton IbSalvarLoc;
-
+    Intent intent;
     ImageButton ibAviso;
     Context context;
     private boolean connected = false;
@@ -70,38 +70,27 @@ public class MainActivity extends AppCompatActivity {
         bGpsFirst = false;
 
         if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.SEND_SMS)) {
+                Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
             } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.SEND_SMS},
+                ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.SEND_SMS },
                         MY_PERMISSIONS_REQUEST_SEND_SMS);
             }
         }
 
-
-
-
-
-
-
-        if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, 0);
         }
 
-        Toast.makeText(context, IMEI, Toast.LENGTH_SHORT).show();
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+       // Toast.makeText(context, IMEI, Toast.LENGTH_SHORT).show();
+        //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        mydatabase = openOrCreateDatabase("portaria.db", MODE_PRIVATE, null);
+        /*mydatabase = openOrCreateDatabase("portaria.db", MODE_PRIVATE, null);
         mydatabase.execSQL("CREATE TABLE IF NOT EXISTS TutorialsPoint(Username VARCHAR,Password VARCHAR);");
         mydatabase.execSQL("DROP TABLE Parametros;");
         mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Parametros(longitude NUMERIC,latitude NUMERIC);");
         mydatabase.execSQL("INSERT INTO Parametros VALUES(1234,5678);");
-
-
-
 
         Cursor c = mydatabase.rawQuery("SELECT * FROM Parametros", null);
         textView3 = (TextView) findViewById(R.id.textView3);
@@ -113,11 +102,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             textView2.setText(c.getString(0));
             textView3.setText(c.getString(1));
-        }
-
+        }*/
 
         //
-
 
         textView = (TextView) findViewById(R.id.textView);
         textView2 = (TextView) findViewById(R.id.textView2);
@@ -125,15 +112,16 @@ public class MainActivity extends AppCompatActivity {
         textView4 = (TextView) findViewById(R.id.textView4);
         textView5 = (TextView) findViewById(R.id.textView5);
 
-
         textView4.setText("teste.....");
 
         textView.setText(IMEI);
 
-
-        Intent intent = new Intent(getApplicationContext(), MediaPlayerService.class);
+        intent = new Intent(getApplicationContext(), MediaPlayerService.class);
         intent.setAction(MediaPlayerService.ACTION_PLAY);
         startService(intent);
+
+        this.finish();
+
         IbOnOff = (ImageButton) findViewById(R.id.btOnOff);
         IbCamera = (ImageButton) findViewById(R.id.btCamera);
         IbSalvarLoc = (ImageButton) findViewById(R.id.IbSalvarLoc);
@@ -148,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         ibAviso.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
 
@@ -157,17 +144,14 @@ public class MainActivity extends AppCompatActivity {
                 if (mensagem.equals("move040370")) {
                     mensagem = "nomove040370";
                     mensmove = "NoMove";
-                }
-                else{
+                } else {
                     mensagem = "move040370";
                     mensmove = "Move";
                 }
 
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage("041999696921", null, mensagem, null, null);
-                Toast.makeText(getApplicationContext(), mensmove,
-                        Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getApplicationContext(), mensmove, Toast.LENGTH_LONG).show();
 
             }
         });
@@ -179,28 +163,25 @@ public class MainActivity extends AppCompatActivity {
                 boolean inv = false;
                 CharSequence text = "Bemvindo!";
                 int duration = Toast.LENGTH_SHORT;
-                //imageButton.setBackgroundColor(Color.parseColor("#00FF00"));
+                // imageButton.setBackgroundColor(Color.parseColor("#00FF00"));
                 IbOnOff.setEnabled(false);
                 if (!connected) {
                     Thread cThread = new Thread(new ClientThread());
                     cThread.start();
                 }
 
-
-                /*new CountDownTimer(3000, 1000) {
-                    public void onFinish() {
-                        // When timer is finished
-                        // Execute your code here
-                        imageButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                    }
-
-                    public void onTick(long millisUntilFinished) {
-                        // millisUntilFinished    The amount of time until finished.
-                    }
-                }.start();*/
+				/*
+				 * new CountDownTimer(3000, 1000) { public void onFinish() { //
+				 * When timer is finished // Execute your code here
+				 * imageButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+				 * }
+				 *
+				 * public void onTick(long millisUntilFinished) { //
+				 * millisUntilFinished The amount of time until finished. }
+				 * }.start();
+				 */
 
                 delay(3);
-
 
             }
         });
@@ -222,16 +203,16 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(), location.getLongitude(), dist);
 
-
                 textView.setText("Distancia Origem:" + String.valueOf(org.distanceTo(location)));
-                textView2.setText("Latitude: " + Location.convert(location.getLatitude(), Location.PARCELABLE_WRITE_RETURN_VALUE));
-                textView3.setText("Longitude:" + Location.convert(location.getLongitude(), Location.PARCELABLE_WRITE_RETURN_VALUE));
+                textView2.setText("Latitude: "
+                        + Location.convert(location.getLatitude(), Location.PARCELABLE_WRITE_RETURN_VALUE));
+                textView3.setText("Longitude:"
+                        + Location.convert(location.getLongitude(), Location.PARCELABLE_WRITE_RETURN_VALUE));
 
-
-                //timer1.cancel();
-                //locationResult.gotLocation(location);
-                //lm.removeUpdates(this);
-                //lm.removeUpdates(locationListenerNetwork);
+                // timer1.cancel();
+                // locationResult.gotLocation(location);
+                // lm.removeUpdates(this);
+                // lm.removeUpdates(locationListenerNetwork);
             }
 
             public void onProviderDisabled(String provider) {
@@ -253,16 +234,11 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    0,
-                    0,
-                    locationListenerGps);
-
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGps);
 
         } catch (Exception e) {
             showMessage(e.getMessage());
         }
-
 
     }
 
@@ -275,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //imageButton.setBackgroundColor(Color.parseColor("#FF0000"));
+                        // imageButton.setBackgroundColor(Color.parseColor("#FF0000"));
                         if (msg.length() > 0) {
 
                             Toast toast = Toast.makeText(context, msg + " " + IMEI, Toast.LENGTH_SHORT);
@@ -298,17 +274,15 @@ public class MainActivity extends AppCompatActivity {
                 Socket socket = new Socket(serverAddr, 81);
                 connected = true;
                 boolean bEnviado = false;
-                //Context context = getApplicationContext();
+                // Context context = getApplicationContext();
                 int duration = Toast.LENGTH_SHORT;
                 if (connected) {
                     try {
                         PrintWriter out = new PrintWriter(
-                                new BufferedWriter(new OutputStreamWriter(
-                                        socket.getOutputStream())), true);
+                                new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
                         out.println("act");
 
-                        BufferedReader in = new BufferedReader(
-                                new InputStreamReader(socket.getInputStream()));
+                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                         try {
                             StringBuilder total = new StringBuilder();
@@ -317,14 +291,14 @@ public class MainActivity extends AppCompatActivity {
                                 total.append(line);
                             }
                             msg = total.toString().trim();
-                            //showToastInThread(MainActivity.this,msg);
-                            //Log.d("ClientActivity", msg);
-
+                            // showToastInThread(MainActivity.this,msg);
+                            // Log.d("ClientActivity", msg);
 
                         } catch (IOException e) {
-                            //Toast toast = Toast.makeText(context, e.getMessage(), duration);
-                            //toast.show();
-                            //e.printStackTrace();
+                            // Toast toast = Toast.makeText(context,
+                            // e.getMessage(), duration);
+                            // toast.show();
+                            // e.printStackTrace();
                             Log.e("NETWORK-RECEIVE", "Something goes wrong: IOException", e);
                         }
 
@@ -353,67 +327,55 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_SEND_SMS: {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                            Manifest.permission.READ_PHONE_STATE)) {
+                if (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE)) {
                     } else {
-                        ActivityCompat.requestPermissions(this,
-                                new String[]{Manifest.permission.READ_PHONE_STATE},
+                        ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.READ_PHONE_STATE },
                                 MY_PERMISSIONS_READ_PHONE_STATE);
                     }
                 }
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     return;
 
                 } else {
-                    Toast.makeText(getApplicationContext(),
-                            "SMS faild, please try again.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "SMS faild, please try again.", Toast.LENGTH_LONG).show();
                     return;
                 }
             }
             case MY_PERMISSIONS_READ_PHONE_STATE: {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)) {
                     } else {
-                        ActivityCompat.requestPermissions(this,
-                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
                                 MY_PERMISSIONS_ACCESS_FINE_LOCATION);
                     }
                 }
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     telephony = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
                     if (telephony != null) {
                         IMEI = telephony.getDeviceId();
                         Toast.makeText(context, IMEI, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(),
-                                "Falhou ao obter IMEI.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Falhou ao obter IMEI.", Toast.LENGTH_LONG).show();
                     }
                     return;
                 } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Falhou ao obter permissão para ler estado do celular.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Falhou ao obter permissão para ler estado do celular.",
+                            Toast.LENGTH_LONG).show();
                     return;
                 }
 
             }
             case MY_PERMISSIONS_ACCESS_FINE_LOCATION: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                            0,
-                            0,
-                            locationListenerGps);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGps);
 
                     Toast toast = Toast.makeText(context, "GPS Requesitado!", Toast.LENGTH_SHORT);
                     toast.show();
-
 
                 }
                 return;
@@ -422,5 +384,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        getDelegate().onStop();
+
+    }
 
 }

@@ -1,6 +1,10 @@
 [
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_launcher.png",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi\\ic_launcher_round.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
     }
 ]

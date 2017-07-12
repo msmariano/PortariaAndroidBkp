@@ -1,150 +1,150 @@
 [
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/chat1.png",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/chat1.png"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\chat.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\chat.png"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/bell.png",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/bell.png"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\phone.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\phone.png"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_item_background_holo_light.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_dark.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_light.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_item_background_holo_light.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/campainha.jpg",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/campainha.jpg"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_check_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_btn_check_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/settings.png",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/settings.png"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_switch_thumb_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_switch_thumb_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_small_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_ratingbar_small_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\acionabutton.jpg",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\acionabutton.jpg"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_top_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_cab_background_top_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_seekbar_thumb_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/phone.png",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/phone.png"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_full_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_ratingbar_full_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_btn_radio_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_track_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_seekbar_track_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_dark.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_dialog_material_background_dark.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_cab_background_top_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_light.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_dialog_material_background_light.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/aviso.png",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/aviso.png"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_search_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_textfield_search_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/chat.png",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/chat.png"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_text_cursor_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_text_cursor_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_text_cursor_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_text_cursor_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_list_selector_holo_dark.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_btn_default_mtrl_shape.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_btn_default_mtrl_shape.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_radio_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_btn_radio_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_launcher2.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\ic_launcher2.png"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_list_selector_holo_light.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_small_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_ratingbar_small_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_internal_bg.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_cab_background_internal_bg.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_item_background_holo_dark.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/forward.png",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/forward.png"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_dark.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_dialog_material_background_dark.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_switch_thumb_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_switch_thumb_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\forward.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\forward.png"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_spinner_textfield_background_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_spinner_textfield_background_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_ratingbar_indicator_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_item_background_holo_dark.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\aviso.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\aviso.png"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_textfield_search_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_textfield_search_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_track_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_seekbar_track_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\bell.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\bell.png"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_thumb_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_seekbar_thumb_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_internal_bg.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_cab_background_internal_bg.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/turnoff.png",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/turnoff.png"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_borderless_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_btn_borderless_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_tab_indicator_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_spinner_textfield_background_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_list_selector_holo_dark.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\turnoff.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\turnoff.png"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/acionabutton.jpg",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/acionabutton.jpg"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_launcher.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\ic_launcher.png"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_btn_borderless_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_btn_borderless_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\keys.bmp",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\keys.bmp"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_full_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_ratingbar_full_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_tab_indicator_material.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_tab_indicator_material.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_indicator_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_ratingbar_indicator_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_light.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_list_selector_holo_light.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/keys.bmp",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/keys.bmp"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_light.xml",
+        "source": "C:\\Users\\msmar\\.android\\build-cache\\f86f04a02aea78690c99d88db39bb75bff2d7916\\output\\res\\drawable\\abc_dialog_material_background_light.xml"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/ic_launcher.png",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/ic_launcher.png"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\chat1.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\chat1.png"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/ic_launcher2.png",
-        "source": "/home/msmariano/StudioProjects/PortariaAndroid/app/src/main/res/drawable/ic_launcher2.png"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\settings.png",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\settings.png"
     },
     {
-        "merged": "/home/msmariano/StudioProjects/PortariaAndroid/app/build/intermediates/res/merged/debug/drawable/abc_btn_check_material.xml",
-        "source": "/home/msmariano/.android/build-cache/98df7193c7dfa633c295df403df0958d82184433/output/res/drawable/abc_btn_check_material.xml"
+        "merged": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\campainha.jpg",
+        "source": "C:\\Users\\msmar\\AndroidStudioProjects\\PortariaAndroid\\app\\src\\main\\res\\drawable\\campainha.jpg"
     }
 ]
