@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -48,7 +50,12 @@ import java.util.List;
 import java.util.Locale;
 
 public class MediaPlayerService extends Service implements LocationListener {
+
+	String ssidlocal = "Escritorio";
+	String ipArduino = "192.168.0.14";
+	Integer portaIpArduino = 81;
 	boolean isInit = false;
+	boolean isHouse = false;
 	boolean isAct = false;
 	StringBuilder sb = new StringBuilder();
 	public static final String ACTION_PLAY = "action_play";
@@ -111,10 +118,14 @@ public class MediaPlayerService extends Service implements LocationListener {
 				numero = addresses.get(0).getSubThoroughfare();
 
 			if (rua.trim().toLowerCase().equals("rua cyro vellozo") && numero.trim().toLowerCase().equals("56")) {
-				updateContext("Em casa[" + rua + " " + numero + "]");
+				builder.setColor(Color.BLUE);
+				updateContext("" + rua + " " + numero);
+				isHouse = true;
 
 			} else {
-				updateContext("Fora de Casa[" + rua + " " + numero + "]");
+				builder.setColor(Color.MAGENTA);
+				updateContext(rua + " " + numero);
+				isHouse = false;
 			}
 
 			try {
@@ -122,25 +133,27 @@ public class MediaPlayerService extends Service implements LocationListener {
 				dist[0] = 0;
 				Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(), location.getLongitude(), dist);
 				if (dist[0] > 100) {
-					builder.setColor(Color.BLUE);
-					builder.setContentTitle("Controle Remoto Ativado");
+					// builder.setColor(Color.BLUE);
+					builder.setContentTitle("Controle Remoto[Retorno ativado]");
 					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
 					isAct = true;
-					showNotification("Fora de Casa[" + rua + " " + numero + "]","Distancia.:" + String.format("%.0f", dist[0]));
+					isHouse = false;
 				} else {
-					builder.setContentTitle("Controle Remoto Desativado");
+					builder.setContentTitle("Controle Remoto[Retorno desativado]");
 					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
-					if (isAct) {
+					if (isAct && isHouse) {
 						isAct = false;
 						cThreadOnline = new Thread(new ClientThreadOnline());
 						cThreadOnline.start();
+
 					}
 
 				}
-				notificationManager.notify(1, builder.build());
+
 			} catch (Exception e) {
 
 			}
+			notificationManager.notify(1, builder.build());
 
 		} catch (IOException e) {
 			updateContext("Erro ao localizar : " + e.getMessage());
@@ -177,14 +190,58 @@ public class MediaPlayerService extends Service implements LocationListener {
 		Intent intent = new Intent(getApplicationContext(), MediaPlayerService.class);
 		intent.setAction(ACTION_STOP);
 		PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 1, intent, 0);
-		builder = new Notification.Builder(this)
-				.setSmallIcon(R.drawable.ic_launcher2)
-				.setColor(0)
-				.setContentTitle("Controle Remoto")
-				.setContentText("")
-				.setDeleteIntent(pendingIntent)
-				.setStyle(style)
+		builder = new Notification.Builder(this).setSmallIcon(R.drawable.ic_launcher2).setColor(0)
+				.setContentTitle("Controle Remoto").setContentText("").setDeleteIntent(pendingIntent).setStyle(style)
 				.addAction(action);
+
+		try {
+			if (ContextCompat.checkSelfPermission(getApplicationContext(),
+					android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+				updateContext("GPS Permitido");
+				locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+				updateContext("Iniciando GPS!");
+				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER/* GPS_PROVIDER */, 1000, 1,
+						this);
+				if (locationManager != null) {
+					Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+					if (location != null) {
+						Geocoder geocoder;
+						List<Address> addresses;
+						geocoder = new Geocoder(this, Locale.getDefault());
+						try {
+							addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+							addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+							String rua = "";
+							String numero = "";
+							if (addresses.get(0).getThoroughfare() != null)
+								rua = addresses.get(0).getThoroughfare();
+							if (addresses.get(0).getSubThoroughfare() != null)
+								numero = addresses.get(0).getSubThoroughfare();
+							sb.append(rua + " " + numero);
+							updateContext(rua + " " + numero);
+
+							Address address = geocoder.getFromLocationName("rua cyro vellozo 56", 1).get(0);
+							dLatitude = address.getLatitude();
+							dLongitude = address.getLongitude();
+
+							float[] dist = new float[1];
+							dist[0] = 0;
+							Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(),
+									location.getLongitude(), dist);
+							builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
+
+						} catch (IOException e) {
+							updateContext("Erro ao localizar : " + e.getMessage());
+							e.printStackTrace();
+						}
+					} else
+						updateContext("Não pegou localidade");
+				} else
+					updateContext("GPS não iniciado");
+			}
+		} catch (Exception e) {
+			updateContext(e.getMessage());
+		}
 
 		style.setShowActionsInCompactView(0);
 		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -204,7 +261,8 @@ public class MediaPlayerService extends Service implements LocationListener {
 
 		public void run() {
 			boolean isRun = true;
-			while (!isAct&&isRun) {
+			showNotification("Acionamento", "Aguardando WiFi act!");
+			while (!isAct && isRun) {
 				try {
 					Thread.sleep(1000);
 
@@ -213,29 +271,40 @@ public class MediaPlayerService extends Service implements LocationListener {
 								.getSystemService(Context.CONNECTIVITY_SERVICE);
 						NetworkInfo networkInfo = cm.getActiveNetworkInfo();
 
-						if (networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_WIFI
-								&& networkInfo.isConnected()) {
-							// Wifi is connected
-							WifiManager wifiManager = (WifiManager) getApplicationContext()
-									.getSystemService(Context.WIFI_SERVICE);
-							WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-							String ssid = wifiInfo.getSSID();
-							if(ssid.equals("Escritorio")){
-								showNotification("Acionando portao","");
-								Thread cThread = new Thread(new ClientThread());
-								cThread.start();
-								continue;
+						if (networkInfo != null) {
+							if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI && networkInfo.isConnected())
+
+							{
+								// Wifi is connected
+								WifiManager wifiManager = (WifiManager) getApplicationContext()
+										.getSystemService(Context.WIFI_SERVICE);
+								WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+								String ssid = wifiInfo.getSSID();
+								if (ssid.equals("\"" + ssidlocal + "\"")) {
+									showNotification("Acionamento", "Ativado!");
+									Thread cThread = new Thread(new ClientThread());
+									cThread.start();
+									isRun = false;
+									continue;
+								} else {
+									showNotification("Acionamento",
+											"ssid " + ssidlocal + " não conectado. Conectado em " + ssid + "");
+								}
+
+							} else {
+								showNotification("Acionamento", "WiFi não conectado!");
 							}
-
 						} else {
-
+							showNotification("Acionamento", "Sem informacao de rede!");
 						}
 					} catch (Exception e) {
-						isAct = false;
+						showNotification("Acionamento", e.getMessage());
+						isRun = false;
 					}
 
 				} catch (Exception e) {
-					isAct = false;
+					showNotification("Acionamento", e.getMessage());
+					isRun = false;
 				}
 			}
 		}
@@ -245,9 +314,9 @@ public class MediaPlayerService extends Service implements LocationListener {
 
 		public void run() {
 			try {
-				showNotification("Portão","Acionando");
-				InetAddress serverAddr = InetAddress.getByName("192.168.0.14");
-				Socket socket = new Socket(serverAddr, 81);
+				showNotification("Portão", "Acionando");
+				InetAddress serverAddr = InetAddress.getByName(ipArduino);
+				Socket socket = new Socket(serverAddr, portaIpArduino);
 				connected = true;
 				boolean bEnviado = false;
 				int duration = Toast.LENGTH_SHORT;
@@ -269,20 +338,20 @@ public class MediaPlayerService extends Service implements LocationListener {
 							updateContext(msg);
 						} catch (IOException e) {
 							updateContext("Erro envio comando portão : " + e.getMessage());
-							showNotification("Comando do portao[1]",e.getMessage());
+							showNotification("Comando do portao[1]", e.getMessage());
 						}
 
 					} catch (Exception e) {
 						updateContext("Erro envio comando portão : " + e.getMessage());
-						showNotification("Comando do portao[2]",e.getMessage());
+						showNotification("Comando do portao[2]", e.getMessage());
 					}
 
 				}
 				socket.close();
-				showNotification("Portão","Acionamento finalizado!");
+				showNotification("Portão", "Acionamento finalizado!");
 				connected = false;
 			} catch (Exception e) {
-				showNotification("Comando do portao","Sem conexao!!!");
+				showNotification("Comando do portao", "Sem conexao!!!");
 				connected = false;
 			}
 		}
@@ -309,7 +378,8 @@ public class MediaPlayerService extends Service implements LocationListener {
 			@Override
 			public void onPause() {
 				super.onPause();
-				//buildNotification(generateAction(android.R.drawable.ic_media_pause, "Pause", ACTION_PLAY));
+				// buildNotification(generateAction(android.R.drawable.ic_media_pause,
+				// "Pause", ACTION_PLAY));
 				Thread cThread = new Thread(new ClientThread());
 				cThread.start();
 			}
@@ -335,68 +405,43 @@ public class MediaPlayerService extends Service implements LocationListener {
 		return super.onUnbind(intent);
 	}
 
-	private void showNotification(String title,String content) {
+	private void showNotification(String title, String content) {
 
-		Notification.Builder mBuilder= new Notification.Builder(this)
-				.setSmallIcon(R.drawable.aviso)
-				.setContentTitle(title)
-				.setColor(Color.RED)
-				.setAutoCancel(true)
-				.setContentText(content)
+		Notification.Builder mBuilder = new Notification.Builder(this).setSmallIcon(R.drawable.aviso)
+				.setContentTitle(title).setColor(Color.RED).setAutoCancel(true).setContentText(content)
 				.setContentIntent(PendingIntent.getActivity(this, 0, new Intent(), 0));
-		NotificationManager notificationManager= (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(11, mBuilder.build());
 
 	}
-	public void inicializacao(){
-		/*if(isInit)
-			return;
-		isInit = true;*/
-		try {
-			if (ContextCompat.checkSelfPermission(getApplicationContext(),
-					android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-				updateContext("GPS Permitido");
-				locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-				updateContext("Iniciando GPS!");
-				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER/* GPS_PROVIDER */, 1000, 1,
-						this);
-				if (locationManager != null) {
-					Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-					if (location != null) {
-						Geocoder geocoder;
-						List<Address> addresses;
-						geocoder = new Geocoder(this, Locale.getDefault());
-						try {
-							addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-							addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-							String rua = "";
-							String numero = "";
-							if (addresses.get(0).getThoroughfare() != null)
-								rua = addresses.get(0).getThoroughfare();
-							if (addresses.get(0).getSubThoroughfare() != null)
-								numero = addresses.get(0).getSubThoroughfare();
-							sb.append(rua + " " + numero);
-							updateContext(rua + " " + numero);
 
-							Address address = geocoder.getFromLocationName("rua cyro vellozo 56", 1).get(0);
-							dLatitude = address.getLatitude();
-							dLongitude = address.getLongitude();
+	public void inicializacao() {
 
-							float[] dist = new float[1];
-							dist[0] = 0;
-							Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(),
-									location.getLongitude(), dist);
-							updateContext("Distancia.: " + dist[0]);
-
-						} catch (IOException e) {
-							updateContext("Erro ao localizar : " + e.getMessage());
-							e.printStackTrace();
-						}
-					}
+		if (!isInit) {
+			//isInit = true;
+			try {
+				SQLiteDatabase mydatabase = openOrCreateDatabase("/storage/emulated/0/Android/data/com.projetos.marcelo.portaria/portaria.db", MODE_PRIVATE, null);
+				Cursor c = mydatabase.rawQuery("SELECT campo1,campo2 FROM Parametros WHERE parametro = 'conexao_ip_arduino'", null);
+				c.moveToFirst();
+				if (c.getCount() > 0) {
+					showNotification("Configuração Arduino", c.getString(0)+":"+c.getString(1));
+					ipArduino = c.getString(0);
+					portaIpArduino =  Integer.parseInt(c.getString(1));
+					c.close();
 				}
+				c = mydatabase.rawQuery("SELECT campo1 FROM Parametros WHERE parametro = 'ssid_local'", null);
+				c.moveToFirst();
+				if (c.getCount() > 0) {
+					showNotification("Configuração ssidLocal", c.getString(0));
+					ssidlocal = c.getString(0);
+					c.close();
+				}
+				mydatabase.close();
+
+			} catch (Exception e) {
+				showNotification("Inicialização!",e.getMessage());
 			}
-		} catch (Exception e) {
-			updateContext(e.getMessage());
 		}
+
 	}
 }
