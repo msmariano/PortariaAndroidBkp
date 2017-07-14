@@ -32,7 +32,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 //teste github
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 	private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
 	private static final int MY_PERMISSIONS_READ_PHONE_STATE = 1;
 	private static final int MY_PERMISSIONS_ACCESS_FINE_LOCATION = 2;
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 	SQLiteDatabase mydatabase;
 	TelephonyManager telephony;
 	String mensagem = "";
+	MainActivity thisLocal = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -128,9 +129,10 @@ public class MainActivity extends AppCompatActivity {
 		intent = new Intent(getApplicationContext(), MediaPlayerService.class);
 		intent.setAction(MediaPlayerService.ACTION_PLAY);
 		startService(intent);
-
-		this.finish();
-
+		thisLocal = this;
+		
+		
+		
 		IbOnOff = (ImageButton) findViewById(R.id.btOnOff);
 		IbCamera = (ImageButton) findViewById(R.id.btCamera);
 		IbSalvarLoc = (ImageButton) findViewById(R.id.IbSalvarLoc);
@@ -141,11 +143,14 @@ public class MainActivity extends AppCompatActivity {
 			public void onClick(View v)
 
 			{
-
+				thisLocal.finish();
 			}
 		});
 
-		ibAviso.setOnClickListener(new View.OnClickListener() {
+
+		ibAviso.setOnClickListener(this);
+
+		/*ibAviso.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v)
 
 			{
@@ -163,7 +168,9 @@ public class MainActivity extends AppCompatActivity {
 				Toast.makeText(getApplicationContext(), mensmove, Toast.LENGTH_LONG).show();
 
 			}
-		});
+		});*/
+		
+		
 
 		IbOnOff.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v)
@@ -178,23 +185,12 @@ public class MainActivity extends AppCompatActivity {
 					Thread cThread = new Thread(new ClientThread());
 					cThread.start();
 				}
-
-				/*
-				 * new CountDownTimer(3000, 1000) { public void onFinish() { //
-				 * When timer is finished // Execute your code here
-				 * imageButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
-				 * }
-				 *
-				 * public void onTick(long millisUntilFinished) { //
-				 * millisUntilFinished The amount of time until finished. }
-				 * }.start();
-				 */
-
+				else
+					showMessage("Aguarde...Ainda executando!")
 				delay(3);
 
 			}
 		});
-
 	}
 
 	public void delay(int seconds) {
@@ -221,6 +217,8 @@ public class MainActivity extends AppCompatActivity {
 		});
 	}
 
+
+
 	public class ClientThread implements Runnable {
 
 		public void run() {
@@ -229,16 +227,13 @@ public class MainActivity extends AppCompatActivity {
 				Socket socket = new Socket(serverAddr, 81);
 				connected = true;
 				boolean bEnviado = false;
-				// Context context = getApplicationContext();
 				int duration = Toast.LENGTH_SHORT;
 				if (connected) {
 					try {
 						PrintWriter out = new PrintWriter(
 								new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 						out.println("act");
-
 						BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
 						try {
 							StringBuilder total = new StringBuilder();
 							String line;
@@ -246,28 +241,19 @@ public class MainActivity extends AppCompatActivity {
 								total.append(line);
 							}
 							msg = total.toString().trim();
-							// showToastInThread(MainActivity.this,msg);
-							// Log.d("ClientActivity", msg);
-
+							showMessage(msg);
 						} catch (IOException e) {
-							// Toast toast = Toast.makeText(context,
-							// e.getMessage(), duration);
-							// toast.show();
-							// e.printStackTrace();
-							Log.e("NETWORK-RECEIVE", "Something goes wrong: IOException", e);
+							showMessage("ClientThread[IOException] : "+e.getMessage());
 						}
 
 					} catch (Exception e) {
-						Toast toast = Toast.makeText(context, e.getMessage(), duration);
-						toast.show();
+						showMessage("ClientThread : "+e.getMessage());
 					}
-
 				}
-				socket.close();
-				Log.d("ClientActivity", "C: Closed.");
+				socket.close();				
 				connected = false;
 			} catch (Exception e) {
-				Log.e("ClientActivity", "C: Error", e);
+				showMessage("ClientThread : "+e.getMessage());
 				connected = false;
 			}
 		}
@@ -340,8 +326,13 @@ public class MainActivity extends AppCompatActivity {
 		getDelegate().onStop();
 
 	}
-	public void onClick(View v){
-		
+
+	@Override
+	public void onClick(View v) {
+
+		if (v.equals(ibAviso)){
+			showMessage("teste");
+		}
 	}
 
 }
