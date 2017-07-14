@@ -1,5 +1,7 @@
 package com.projetos.marcelo.portaria;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import static android.content.Context.MODE_APPEND;
 import static android.database.sqlite.SQLiteDatabase.openDatabase;
 
@@ -9,6 +11,7 @@ import static android.database.sqlite.SQLiteDatabase.openDatabase;
 
 public class TraceDAO {
 
+    SQLiteDatabase mydatabase;
     TraceDAO(){
         mydatabase = openDatabase("/storage/emulated/0/Android/data/com.projetos.marcelo.portaria/portaria.db",null, MODE_APPEND);
     }
