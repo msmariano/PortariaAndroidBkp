@@ -1627,7 +1627,7 @@ containing a value of this type.
         public static final int turnoff=0x7f020057;
     }
     public static final class id {
-        public static final int IbSalvarLoc=0x7f0c0057;
+        public static final int IbSalvarLoc=0x7f0c0055;
         public static final int action0=0x7f0c005a;
         public static final int action_bar=0x7f0c0041;
         public static final int action_bar_activity_content=0x7f0c0000;
@@ -1647,13 +1647,14 @@ containing a value of this type.
         public static final int alertTitle=0x7f0c0030;
         public static final int always=0x7f0c001c;
         public static final int beginning=0x7f0c0019;
-        public static final int btCamera=0x7f0c0050;
-        public static final int btOnOff=0x7f0c0051;
+        public static final int btCamera=0x7f0c0057;
+        public static final int btOnOff=0x7f0c0056;
         public static final int buttonPanel=0x7f0c002b;
         public static final int cancel_action=0x7f0c005b;
         public static final int checkbox=0x7f0c0039;
         public static final int chronometer=0x7f0c0061;
         public static final int collapseActionView=0x7f0c001d;
+        public static final int config=0x7f0c0058;
         public static final int contentPanel=0x7f0c0031;
         public static final int custom=0x7f0c0037;
         public static final int customPanel=0x7f0c0036;
@@ -1671,7 +1672,6 @@ containing a value of this type.
         public static final int icon=0x7f0c0029;
         public static final int ifRoom=0x7f0c001e;
         public static final int image=0x7f0c0026;
-        public static final int imageButton=0x7f0c0058;
         public static final int info=0x7f0c0065;
         public static final int line1=0x7f0c005f;
         public static final int line3=0x7f0c0063;
@@ -1717,11 +1717,11 @@ containing a value of this type.
         public static final int text=0x7f0c0064;
         public static final int text2=0x7f0c0062;
         public static final int textSpacerNoButtons=0x7f0c0034;
-        public static final int textView=0x7f0c0052;
-        public static final int textView2=0x7f0c0053;
-        public static final int textView3=0x7f0c0054;
-        public static final int textView4=0x7f0c0055;
-        public static final int textView5=0x7f0c0056;
+        public static final int textView=0x7f0c0050;
+        public static final int textView2=0x7f0c0051;
+        public static final int textView3=0x7f0c0052;
+        public static final int textView4=0x7f0c0053;
+        public static final int textView5=0x7f0c0054;
         public static final int time=0x7f0c0060;
         public static final int title=0x7f0c002a;
         public static final int title_template=0x7f0c002f;

@@ -10,21 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.projetos.marcelo.portaria.MainActivity">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btCamera"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:src="@drawable/chat" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btOnOff"
-        android:src="@drawable/turnoff"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/btCamera" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -76,7 +62,23 @@
         android:layout_toEndOf="@+id/btOnOff" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btCamera"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/chat" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btOnOff"
+        android:src="@drawable/turnoff"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/btCamera" />
+
+    <ImageButton
+        android:id="@+id/config"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/settings"
@@ -88,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/imageButton"
+        android:layout_toEndOf="@+id/config"
         app:srcCompat="@drawable/aviso" />
 
 </RelativeLayout>

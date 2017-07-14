@@ -46,14 +46,15 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class MediaPlayerService extends Service implements LocationListener {
 
-	String ssidlocal = "Escritorio";
-	String ipArduino = "192.168.0.14";
-	Integer portaIpArduino = 81;
+	String ssidlocal = "";
+	String ipArduino = "";
+	Integer portaIpArduino = 0;
 	boolean isInit = false;
 	boolean isHouse = false;
 	boolean isAct = false;
@@ -79,6 +80,7 @@ public class MediaPlayerService extends Service implements LocationListener {
 	public double dLatitude, dLongitude;
 	public Location org;
 	MediaPlayerService localObj;
+	String enderecoCompleto = "";
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -117,7 +119,13 @@ public class MediaPlayerService extends Service implements LocationListener {
 			if (addresses.get(0).getSubThoroughfare() != null)
 				numero = addresses.get(0).getSubThoroughfare();
 
-			if (rua.trim().toLowerCase().equals("rua cyro vellozo") && numero.trim().toLowerCase().equals("56")) {
+			Trace trace = new Trace();
+			trace.setData(new Date());
+			trace.setLongitude(location.getLongitude());
+			trace.setLatitude(location.getLatitude());
+			trace.setEndereco(rua+" "+numero);
+
+			if ( enderecoCompleto.toLowerCase().equals( rua.trim().toLowerCase()+" "+numero.trim().toLowerCase())) {
 				builder.setColor(Color.BLUE);
 				updateContext("" + rua + " " + numero);
 				isHouse = true;
@@ -220,15 +228,23 @@ public class MediaPlayerService extends Service implements LocationListener {
 							sb.append(rua + " " + numero);
 							updateContext(rua + " " + numero);
 
-							Address address = geocoder.getFromLocationName("rua cyro vellozo 56", 1).get(0);
-							dLatitude = address.getLatitude();
-							dLongitude = address.getLongitude();
+							ParametroDAO parametroDAO = new ParametroDAO();
+							Parametro parametro = parametroDAO.buscarParamento("endereco_local");
+							if (parametro != null) {
+								Address address = geocoder.getFromLocationName(parametro.getCampo1(), 1).get(0);
+								enderecoCompleto = parametro.getCampo1();
+								dLatitude = address.getLatitude();
+								dLongitude = address.getLongitude();
+                                parametro.setParametros("coordenadas_local",String.valueOf(dLatitude),String.valueOf(dLongitude) );
+                                parametroDAO.salvar(parametro);
 
-							float[] dist = new float[1];
-							dist[0] = 0;
-							Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(),
-									location.getLongitude(), dist);
-							builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
+								float[] dist = new float[1];
+								dist[0] = 0;
+								Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(),
+										location.getLongitude(), dist);
+								builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
+								parametroDAO.fechar();
+							}
 
 						} catch (IOException e) {
 							updateContext("Erro ao localizar : " + e.getMessage());
@@ -418,30 +434,24 @@ public class MediaPlayerService extends Service implements LocationListener {
 	public void inicializacao() {
 
 		if (!isInit) {
-			//isInit = true;
+			// isInit = true;
 			try {
-				SQLiteDatabase mydatabase = openOrCreateDatabase("/storage/emulated/0/Android/data/com.projetos.marcelo.portaria/portaria.db", MODE_PRIVATE, null);
-				Cursor c = mydatabase.rawQuery("SELECT campo1,campo2 FROM Parametros WHERE parametro = 'conexao_ip_arduino'", null);
-				c.moveToFirst();
-				if (c.getCount() > 0) {
-					showNotification("Configuração Arduino", c.getString(0)+":"+c.getString(1));
-					ipArduino = c.getString(0);
-					portaIpArduino =  Integer.parseInt(c.getString(1));
-					c.close();
+
+				ParametroDAO parametroDAO = new ParametroDAO();
+				Parametro parametro = parametroDAO.buscarParamento("conexao_ip_arduino");
+				if (parametro != null) {
+					ipArduino = parametro.getCampo1();
+					portaIpArduino = Integer.parseInt(parametro.getCampo2());
 				}
-				c = mydatabase.rawQuery("SELECT campo1 FROM Parametros WHERE parametro = 'ssid_local'", null);
-				c.moveToFirst();
-				if (c.getCount() > 0) {
-					showNotification("Configuração ssidLocal", c.getString(0));
-					ssidlocal = c.getString(0);
-					c.close();
+				parametro = parametroDAO.buscarParamento("ssid_local");
+				if (parametro != null) {
+					ssidlocal = parametro.getCampo1();
 				}
-				mydatabase.close();
+				parametroDAO.fechar();
 
 			} catch (Exception e) {
-				showNotification("Inicialização!",e.getMessage());
+				showNotification("Inicialização!", e.getMessage());
 			}
 		}
-
 	}
 }

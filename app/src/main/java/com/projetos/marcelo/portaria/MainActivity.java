@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
@@ -16,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -30,24 +28,26 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
-//teste github
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 	private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
 	private static final int MY_PERMISSIONS_READ_PHONE_STATE = 1;
 	private static final int MY_PERMISSIONS_ACCESS_FINE_LOCATION = 2;
+	Intent intent;
 	ImageButton IbOnOff;
 	ImageButton IbCamera;
 	ImageButton IbSalvarLoc;
-	Intent intent;
 	ImageButton ibAviso;
+	ImageButton config;
 	Context context;
 	private boolean connected = false;
 	int milliseconds;
 	public String IMEI;
 	public String msg;
 	public Location org;
-	boolean bGpsFirst;
 	private LocationManager locationManager;
 	public double dLatitude, dLongitude;
 	LocationListener locationListenerGps;
@@ -66,9 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		context = getApplicationContext();
-		bGpsFirst = false;
 
 		if (ContextCompat.checkSelfPermission(this,
 				Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
@@ -79,118 +77,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			}
 		}
 
-		/*
-		 * if (ContextCompat.checkSelfPermission(this,
-		 * Manifest.permission.ACCESS_FINE_LOCATION) !=
-		 * PackageManager.PERMISSION_GRANTED) {
-		 * ActivityCompat.requestPermissions(this, new String[] {
-		 * Manifest.permission.ACCESS_FINE_LOCATION }, 0); }
-		 */
-
-		// Toast.makeText(context, IMEI, Toast.LENGTH_SHORT).show();
-		// locationManager = (LocationManager)
-		// getSystemService(Context.LOCATION_SERVICE);
-
-		//mydatabase = openOrCreateDatabase("/storage/emulated/0/Android/data/com.projetos.marcelo.portaria/portaria.db", MODE_APPEND, null);
-		//try {
-			//mydatabase.execSQL("DROP TABLE Parametros;");
-		//} catch (Exception e) {
-
-		//}
-		//mydatabase.execSQL(
-		//		"CREATE TABLE IF NOT EXISTS Parametros(parametro VARCHAR(200),campo1 VARCHAR(200),campo2 VARCHAR(200));");
-		//mydatabase.execSQL("INSERT INTO Parametros VALUES('conexao_ip_arduino','192.168.0.14','81');");
-		//mydatabase.execSQL("INSERT INTO Parametros VALUES('ssid_local','Escritorio','');");
-		//mydatabase.close();
-		/*
-		 * Cursor c = mydatabase.rawQuery("SELECT * FROM Parametros", null);
-		 * textView3 = (TextView) findViewById(R.id.textView3); textView2 =
-		 * (TextView) findViewById(R.id.textView2); c.moveToFirst(); if
-		 * (c.getCount() == 0) { textView3.setText("No records found");
-		 * 
-		 * } else { textView2.setText(c.getString(0));
-		 * textView3.setText(c.getString(1)); }
-		 */
-
-		//
-
-		/*
-		 * textView = (TextView) findViewById(R.id.textView); textView2 =
-		 * (TextView) findViewById(R.id.textView2); textView3 = (TextView)
-		 * findViewById(R.id.textView3); textView4 = (TextView)
-		 * findViewById(R.id.textView4); textView5 = (TextView)
-		 * findViewById(R.id.textView5);
-		 * 
-		 * textView4.setText("teste.....");
-		 * 
-		 * textView.setText(IMEI);
-		 */
-
 		intent = new Intent(getApplicationContext(), MediaPlayerService.class);
 		intent.setAction(MediaPlayerService.ACTION_PLAY);
 		startService(intent);
 		thisLocal = this;
-		
-		
-		
-		IbOnOff = (ImageButton) findViewById(R.id.btOnOff);
-		IbCamera = (ImageButton) findViewById(R.id.btCamera);
+
+		textView =  (TextView) findViewById(R.id.textView);
+		textView2 = (TextView) findViewById(R.id.textView2);
+		textView3 = (TextView) findViewById(R.id.textView3);
+		textView4 = (TextView) findViewById(R.id.textView4);
+		textView5 = (TextView) findViewById(R.id.textView5);
+		textView.setText("");
+		textView2.setText("");
+		textView3.setText("");
+		textView4.setText("");
+		textView5.setText("");
+
+		IbOnOff =     (ImageButton) findViewById(R.id.btOnOff);
+		IbCamera =    (ImageButton) findViewById(R.id.btCamera);
 		IbSalvarLoc = (ImageButton) findViewById(R.id.IbSalvarLoc);
-
-		ibAviso = (ImageButton) findViewById(R.id.ibaviso);
-
-		IbSalvarLoc.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v)
-
-			{
-				thisLocal.finish();
-			}
-		});
-
-
+		ibAviso =     (ImageButton) findViewById(R.id.ibaviso);
+		config =	  (ImageButton) findViewById(R.id.config);
+		IbSalvarLoc.setOnClickListener(this);
 		ibAviso.setOnClickListener(this);
-
-		/*ibAviso.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v)
-
-			{
-				String mensmove = "";
-				if (mensagem.equals("move040370")) {
-					mensagem = "nomove040370";
-					mensmove = "NoMove";
-				} else {
-					mensagem = "move040370";
-					mensmove = "Move";
-				}
-
-				SmsManager smsManager = SmsManager.getDefault();
-				smsManager.sendTextMessage("041999696921", null, mensagem, null, null);
-				Toast.makeText(getApplicationContext(), mensmove, Toast.LENGTH_LONG).show();
-
-			}
-		});*/
-		
-		
-
-		IbOnOff.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v)
-
-			{
-				boolean inv = false;
-				CharSequence text = "Bemvindo!";
-				int duration = Toast.LENGTH_SHORT;
-				// imageButton.setBackgroundColor(Color.parseColor("#00FF00"));
-				IbOnOff.setEnabled(false);
-				if (!connected) {
-					Thread cThread = new Thread(new ClientThread());
-					cThread.start();
-				}
-				else
-					showMessage("Aguarde...Ainda executando!")
-				delay(3);
-
-			}
-		});
+		IbOnOff.setOnClickListener(this);
+		config.setOnClickListener(this);
 	}
 
 	public void delay(int seconds) {
@@ -205,12 +116,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 						// imageButton.setBackgroundColor(Color.parseColor("#FF0000"));
 						if (msg.length() > 0) {
 
-							Toast toast = Toast.makeText(context, msg + " " + IMEI, Toast.LENGTH_SHORT);
-							toast.show();
 						}
 						msg = "";
 
-						IbOnOff.setEnabled(true);
+						//IbOnOff.setEnabled(true);
 					}
 				}, milliseconds);
 			}
@@ -223,9 +132,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		public void run() {
 			try {
+				connected = true;
+
 				InetAddress serverAddr = InetAddress.getByName("192.168.0.14");
 				Socket socket = new Socket(serverAddr, 81);
-				connected = true;
+
 				boolean bEnviado = false;
 				int duration = Toast.LENGTH_SHORT;
 				if (connected) {
@@ -320,18 +231,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 	}
 
-	@Override
-	protected void onStop() {
-		super.onStop();
-		getDelegate().onStop();
 
-	}
 
 	@Override
 	public void onClick(View v) {
 
 		if (v.equals(ibAviso)){
-			showMessage("teste");
+
+			String mensmove = "";
+			if (mensagem.equals("move040370")) {
+				mensagem = "nomove040370";
+				mensmove = "NoMove";
+			} else {
+				mensagem = "move040370";
+				mensmove = "Move";
+			}
+			SmsManager smsManager = SmsManager.getDefault();
+			smsManager.sendTextMessage("041999696921", null, mensagem, null, null);
+			showMessage(mensmove);
+
+		}
+		else if (v.equals(IbOnOff)){
+			try {
+
+				boolean inv = false;
+				CharSequence text = "Bemvindo!";
+				int duration = Toast.LENGTH_SHORT;
+				// imageButton.setBackgroundColor(Color.parseColor("#00FF00"));
+				//IbOnOff.setEnabled(false);
+				if (!connected) {
+					Thread cThread = new Thread(new ClientThread());
+					cThread.start();
+				} else
+					showMessage("Aguarde...Ainda executando!");
+				//delay(3);
+			}
+			catch (Exception e){
+				showMessage(e.getMessage());
+			}
+
+		}
+		else if(v.equals(IbSalvarLoc)){
+			finish();
+		}
+		else if(v.equals(config)){
+			try {
+				ParametroDAO parametroDAO = new ParametroDAO();
+				List<Parametro> parametros = parametroDAO.listar();
+				if(parametros != null){
+					String mens = "";
+					for(Parametro parametro : parametros){
+						mens = mens+ parametro.getParametro()+" : "+parametro.getCampo1()+" "+parametro.getCampo2()+"\n";
+					}
+					showMessage(mens);
+				}
+			}
+			catch (Exception e){
+				showMessage(e.getMessage());
+			}
 		}
 	}
 
