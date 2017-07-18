@@ -81,6 +81,8 @@ public class MediaPlayerService extends Service implements LocationListener {
 	public Location org;
 	MediaPlayerService localObj;
 	String enderecoCompleto = "";
+    Integer distanciaDisparo = 100;
+    boolean acionarDisparo = true;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -140,7 +142,7 @@ public class MediaPlayerService extends Service implements LocationListener {
 				float[] dist = new float[1];
 				dist[0] = 0;
 				Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(), location.getLongitude(), dist);
-				if (dist[0] > 100) {
+				if (dist[0] > distanciaDisparo) {
 					// builder.setColor(Color.BLUE);
 					builder.setContentTitle("Controle Remoto[Retorno ativado]");
 					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
@@ -149,7 +151,7 @@ public class MediaPlayerService extends Service implements LocationListener {
 				} else {
 					builder.setContentTitle("Controle Remoto[Retorno desativado]");
 					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
-					if (isAct && isHouse) {
+					if (isAct && isHouse && acionarDisparo) {
 						isAct = false;
 						cThreadOnline = new Thread(new ClientThreadOnline());
 						cThreadOnline.start();
@@ -201,6 +203,19 @@ public class MediaPlayerService extends Service implements LocationListener {
 		builder = new Notification.Builder(this).setSmallIcon(R.drawable.ic_launcher2).setColor(0)
 				.setContentTitle("Controle Remoto").setContentText("").setDeleteIntent(pendingIntent).setStyle(style)
 				.addAction(action);
+
+        try{
+            ParametroDAO parametroDAO = new ParametroDAO();
+            Parametro parametro = parametroDAO.buscarParamento("distancia_disparo");
+            distanciaDisparo =  Integer.parseInt(parametro.getCampo1());
+            parametro = parametroDAO.buscarParamento("acionar_disparo");
+            acionarDisparo  = Boolean.parseBoolean(parametro.getCampo1());
+
+        }catch (Exception e){
+
+        }
+
+
 
 		try {
 			if (ContextCompat.checkSelfPermission(getApplicationContext(),
