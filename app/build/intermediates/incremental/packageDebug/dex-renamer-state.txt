@@ -1,7 +1,7 @@
-#Fri Jul 14 16:32:36 BRT 2017
-base.0=/home/msmariano/StudioProjects/PortariaAndroidBkp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_e101ebc9c761ee48230c89166670c48ca008f82d
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=/home/msmariano/StudioProjects/PortariaAndroidBkp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_536341a2d6a78750bf9e995ee5bf8609a44fc10e/classes.dex
-base.1=/home/msmariano/StudioProjects/PortariaAndroidBkp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_536341a2d6a78750bf9e995ee5bf8609a44fc10e
-file.0=/home/msmariano/StudioProjects/PortariaAndroidBkp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_e101ebc9c761ee48230c89166670c48ca008f82d/classes.dex
+#Fri Aug 11 14:45:00 BRT 2017
+base.0=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_e0adc13b903e7669b7e6f54443839cdfb9529a96
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_23f470373c79e61de5a4fa7d0034f0264161498e\\classes.dex
+base.1=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_23f470373c79e61de5a4fa7d0034f0264161498e
+file.0=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_e0adc13b903e7669b7e6f54443839cdfb9529a96\\classes.dex

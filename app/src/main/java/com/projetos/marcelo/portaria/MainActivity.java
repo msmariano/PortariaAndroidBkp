@@ -252,7 +252,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		}
 		else if (v.equals(IbOnOff)){
-			try {
+
+            Intent intentTelaPrincipal = new Intent(getApplicationContext(), PrincipalActivity.class);
+            startActivity(intentTelaPrincipal);
+			/*try {
 
 				boolean inv = false;
 				CharSequence text = "Bemvindo!";
@@ -268,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			}
 			catch (Exception e){
 				showMessage(e.getMessage());
-			}
+			}*/
 
 		}
 		else if(v.equals(IbSalvarLoc)){

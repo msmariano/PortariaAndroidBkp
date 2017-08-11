@@ -32,13 +32,11 @@
         <service
             android:name="com.projetos.marcelo.portaria.MainActivityService"
             android:exported="false" />
-        <service android:name="com.projetos.marcelo.portaria.MyMessagingService" >
-        </service>
+        <service android:name="com.projetos.marcelo.portaria.MyMessagingService" />
         <service
             android:name="com.projetos.marcelo.portaria.MediaPlayerService"
             android:exported="false" />
-        <service android:name="com.projetos.marcelo.portaria.MyMessagingService" >
-        </service>
+        <service android:name="com.projetos.marcelo.portaria.MyMessagingService" />
 
         <receiver android:name="com.projetos.marcelo.portaria.MessageReadReceiver" >
             <intent-filter>
@@ -52,6 +50,11 @@
         </receiver>
 
         <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+
+        <activity
+            android:name="com.projetos.marcelo.portaria.PrincipalActivity"
+            android:label="@string/title_activity_principal"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
