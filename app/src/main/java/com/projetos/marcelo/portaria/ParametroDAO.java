@@ -49,12 +49,17 @@ public class ParametroDAO {
 
 
     Parametro buscarParamento (String argParametro){
+        try {
+            List<Parametro> listaParametros = SugarRecord.find(Parametro.class, "parametro = ? ", argParametro);
+            if (listaParametros.size() > 0)
+                return listaParametros.get(0);
+            else
+                return null;
+        }
+        catch (Exception e){
 
-        List<Parametro> listaParametros =  SugarRecord.find(Parametro.class, "parametro = ? ", argParametro);
-        if(listaParametros.size() > 0)
-            return listaParametros.get(0);
-        else
-            return null;
+        }
+        return null;
     }
     List<Parametro> listar(){
 

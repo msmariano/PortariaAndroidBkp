@@ -61,53 +61,62 @@ public class PrincipalActivity extends AppCompatActivity
         edIpArduino = (EditText) findViewById(R.id.edIpArduino);
         btAtualizar = (Button)  findViewById(R.id.btAtualizar);
 
-        local = new Localizacao();
-        local.inicializar(this);
-        edEnderecoAtual.setText(local.getLocalizacaoAtual(this));
-        edEnderecoAtual.setEnabled(false);
-
-        ParametroDAO parametroDAO = new ParametroDAO();
-        Parametro parametro = parametroDAO.buscarParamento("conexao_ip_arduino");
-        //edIpArduino.setError("IP do Arduino");
-        if(parametro != null) {
-            edIpArduino.setText(parametro.getCampo1());
-            edPortaArduino.setText(parametro.getCampo2());
-        }
-
-        parametro = parametroDAO.buscarParamento("endereco_local");
-        //edIpArduino.setError("IP do Arduino");
-        if(parametro != null) {
-            edEnderecoLocal.setText(parametro.getCampo1());
-            Address address = local.getCoordenadasByEndereco(edEnderecoLocal.getText().toString(),getApplicationContext());
-            edLatitude.setText( String.valueOf(address.getLatitude()));
-            edLongitude.setText(String.valueOf(address.getLongitude()));
-            edLatitude.setEnabled(false);
-            edLongitude.setEnabled(false);
-        }
-
-        parametro = parametroDAO.buscarParamento("usuario_nome");
-        if(parametro != null)
-            edUsuario.setText(parametro.getCampo1());
-
-        parametro = parametroDAO.buscarParamento("acionar_disparo");
-        if(parametro != null)
-            cbAcionar.setChecked(Boolean.parseBoolean(parametro.getCampo1()));
-
-
-        parametro = parametroDAO.buscarParamento("distancia_disparo");
-        if(parametro != null)
-            edDistancia.setText(parametro.getCampo1());
-
-
         try {
-            TelephonyManager telephony = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-            if (telephony != null) {
-                edImei.setText(telephony.getDeviceId());
-                edImei.setEnabled(false);
-            }
+            local = new Localizacao();
+            local.inicializar(this);
+            edEnderecoAtual.setText(local.getLocalizacaoAtual(this));
+            edEnderecoAtual.setEnabled(false);
         }
         catch (Exception e){
 
+        }
+
+        try {
+            ParametroDAO parametroDAO = new ParametroDAO();
+            Parametro parametro = parametroDAO.buscarParamento("conexao_ip_arduino");
+            //edIpArduino.setError("IP do Arduino");
+            if (parametro != null) {
+                edIpArduino.setText(parametro.getCampo1());
+                edPortaArduino.setText(parametro.getCampo2());
+            }
+
+            parametro = parametroDAO.buscarParamento("endereco_local");
+            //edIpArduino.setError("IP do Arduino");
+            if (parametro != null) {
+                edEnderecoLocal.setText(parametro.getCampo1());
+                Address address = local.getCoordenadasByEndereco(edEnderecoLocal.getText().toString(), getApplicationContext());
+                edLatitude.setText(String.valueOf(address.getLatitude()));
+                edLongitude.setText(String.valueOf(address.getLongitude()));
+                edLatitude.setEnabled(false);
+                edLongitude.setEnabled(false);
+            }
+
+            parametro = parametroDAO.buscarParamento("usuario_nome");
+            if (parametro != null)
+                edUsuario.setText(parametro.getCampo1());
+
+            parametro = parametroDAO.buscarParamento("acionar_disparo");
+            if (parametro != null)
+                cbAcionar.setChecked(Boolean.parseBoolean(parametro.getCampo1()));
+
+
+            parametro = parametroDAO.buscarParamento("distancia_disparo");
+            if (parametro != null)
+                edDistancia.setText(parametro.getCampo1());
+
+
+            try {
+                TelephonyManager telephony = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+                if (telephony != null) {
+                    edImei.setText(telephony.getDeviceId());
+                    edImei.setEnabled(false);
+                }
+            } catch (Exception e) {
+
+            }
+        }
+        catch (Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -127,7 +136,7 @@ public class PrincipalActivity extends AppCompatActivity
                     parametroDAO.setChave("acionar_disparo", String.valueOf(cbAcionar.isChecked())  ,"");
 
                     Address address = local.getCoordenadasByEndereco(edEnderecoLocal.getText().toString(),getApplicationContext());
-                    parametroDAO.setChave("endereco_local_teste", String.valueOf(address.getLatitude())  ,String.valueOf(address.getLongitude()));
+                    parametroDAO.setChave("coordenadas_local", String.valueOf(address.getLatitude())  ,String.valueOf(address.getLongitude()));
                     edLatitude.setText( String.valueOf(address.getLatitude()));
                     edLongitude.setText(String.valueOf(address.getLongitude()));
                     edLatitude.setEnabled(false);

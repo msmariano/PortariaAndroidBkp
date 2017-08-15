@@ -313,6 +313,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 						mens = mens+ parametro.getParametro()+" : "+parametro.getCampo1()+" "+parametro.getCampo2()+"\n";
 					}
 					showMessage(mens);
+
+					SugarRecord.deleteAll(Parametro.class);
+					SugarRecord.deleteAll(Trace.class);
 				}
 			}
 			catch (Exception e){
