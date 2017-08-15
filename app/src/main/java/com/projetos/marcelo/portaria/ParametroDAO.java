@@ -22,13 +22,26 @@ public class ParametroDAO {
 
     public void setChave(String parametro,String campo1, String campo2){
 
+        Parametro chave = null;
 
+        chave = buscarParamento(parametro);
 
-        Parametro chave = new Parametro();
-        chave.setParametro(parametro);
-        chave.setCampo1(campo1);
-        chave.setCampo2(campo2);
-        SugarRecord.save(chave);
+        if(chave == null) {
+            chave = new Parametro();
+            chave.setParametro(parametro);
+            chave.setCampo1(campo1);
+            chave.setCampo2(campo2);
+            SugarRecord.save(chave);
+        }
+        else
+        {
+            SugarRecord.delete(chave);
+            chave.setParametro(parametro);
+            chave.setCampo1(campo1);
+            chave.setCampo2(campo2);
+            SugarRecord.save(chave);
+
+        }
 
 
     }
@@ -38,7 +51,10 @@ public class ParametroDAO {
     Parametro buscarParamento (String argParametro){
 
         List<Parametro> listaParametros =  SugarRecord.find(Parametro.class, "parametro = ? ", argParametro);
-        return listaParametros.get(0);
+        if(listaParametros.size() > 0)
+            return listaParametros.get(0);
+        else
+            return null;
     }
     List<Parametro> listar(){
 

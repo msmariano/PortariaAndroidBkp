@@ -84,6 +84,10 @@
         "source": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
+        "merged": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_trace.xml",
+        "source": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\src\\main\\res\\layout\\activity_trace.xml"
+    },
+    {
         "merged": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
         "source": "C:\\Users\\msmariano\\.android\\build-cache\\246377794250d5c87bf717753485c169fd907780\\output\\res\\layout\\abc_action_menu_layout.xml"
     },

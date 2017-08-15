@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Tue Aug 15 10:01:16 BRT 2017
+#Tue Aug 15 17:28:12 BRT 2017
 14.set=ANDROID_RESOURCE
 180.file=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\anim-v21\\design_bottom_sheet_slide_out.xml
 118.set=ANDROID_RESOURCE
@@ -121,6 +121,7 @@
 111.base=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_
 163.base=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_
 106.set=ANDROID_RESOURCE
+194.file=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\activity_trace.xml
 190.base=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_
 152.set=ANDROID_RESOURCE
 36.base=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_
@@ -247,6 +248,7 @@
 152.base=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_
 101.set=ANDROID_RESOURCE
 96.set=ANDROID_RESOURCE
+194.set=ANDROID_RESOURCE
 25.base=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_
 57.set=ANDROID_RESOURCE
 77.base=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_
@@ -346,7 +348,7 @@
 6.file=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png
 181.base=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_
 121.set=ANDROID_RESOURCE
-count=194
+count=195
 27.base=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_
 77.set=ANDROID_RESOURCE
 79.base=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_
@@ -412,6 +414,7 @@ count=194
 188.file=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable\\design_snackbar_background.xml
 111.file=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-xxhdpi-v4\\abc_popup_background_mtrl_mult.9.png
 163.file=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\design_navigation_item_separator.xml
+194.base=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_
 192.set=ANDROID_RESOURCE
 55.set=ANDROID_RESOURCE
 190.file=C\:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\abc_list_menu_item_checkbox.xml

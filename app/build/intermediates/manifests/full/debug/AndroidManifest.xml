@@ -69,6 +69,7 @@
             android:name="com.projetos.marcelo.portaria.PrincipalActivity"
             android:label="@string/title_activity_principal"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.projetos.marcelo.portaria.TraceActivity" />
     </application>
 
 </manifest>

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.orm.SugarContext;
 import com.orm.SugarRecord;
 import com.projetos.marcelo.portaria.model.Parametro;
+import com.projetos.marcelo.portaria.model.Trace;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -83,13 +84,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		//teste criar base
 		try {
-			SugarRecord.deleteAll(Parametro.class);
+			/*SugarRecord.deleteAll(Parametro.class);
+			SugarRecord.deleteAll(Trace.class);
 			ParametroDAO parametroDAO = new ParametroDAO();
 			parametroDAO.setChave("conexao_ip_arduino","192.168.0.14","81");
 			parametroDAO.setChave("ssid_local","Escritorio","");
 			parametroDAO.setChave("endereco_local","Rua Cyro Vellozo 56","Prado Velho");
 			parametroDAO.setChave("acionar_disparo","false","");
-			parametroDAO.setChave("distancia_disparo","150","");
+			parametroDAO.setChave("distancia_disparo","150","");*/
 
 
 		}

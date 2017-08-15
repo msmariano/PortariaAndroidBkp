@@ -11,19 +11,25 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
-        android:allowBackup="true"
-        android:label="@string/app_name"
-        android:icon="@mipmap/ic_launcher"
         android:name="com.orm.SugarApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
-        <meta-data android:name="DATABASE" android:value="portaria.db" />
-        <meta-data android:name="VERSION" android:value="1" />
-        <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.projetos.marcelo.portaria.model" />
-
+        <meta-data
+            android:name="DATABASE"
+            android:value="portaria.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.projetos.marcelo.portaria.model" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -36,11 +42,11 @@
         <service
             android:name=".MainActivityService"
             android:exported="false" />
-        <service android:name=".MyMessagingService"></service>
+        <service android:name=".MyMessagingService" />
         <service
             android:name=".MediaPlayerService"
             android:exported="false" />
-        <service android:name=".MyMessagingService"></service>
+        <service android:name=".MyMessagingService" />
 
         <receiver android:name=".MessageReadReceiver">
             <intent-filter>
@@ -58,7 +64,8 @@
         <activity
             android:name=".PrincipalActivity"
             android:label="@string/title_activity_principal"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TraceActivity"></activity>
     </application>
 
 </manifest>

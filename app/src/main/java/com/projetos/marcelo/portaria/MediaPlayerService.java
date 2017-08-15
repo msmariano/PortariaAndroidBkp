@@ -77,6 +77,8 @@ public class MediaPlayerService extends Service implements LocationListener {
 	String enderecoCompleto = "";
     Integer distanciaDisparo = 100;
     boolean acionarDisparo = true;
+	private Location mLastLocation;
+	double speed = 0;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -120,6 +122,24 @@ public class MediaPlayerService extends Service implements LocationListener {
 		geocoder = new Geocoder(this, Locale.getDefault());
 
 		try {
+
+
+
+			//calcul manually speed
+
+			if (this.mLastLocation != null)
+				speed = Math.sqrt(
+						Math.pow(location.getLongitude() - mLastLocation.getLongitude(), 2)
+								+ Math.pow(location.getLatitude() - mLastLocation.getLatitude(), 2)
+				) / (location.getTime() - this.mLastLocation.getTime());
+			//if there is speed from location
+			if (location.hasSpeed())
+				//get location speed
+				speed = location.getSpeed();
+			this.mLastLocation = location;
+
+
+
 			addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 			addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 			String rua = "";
@@ -132,14 +152,14 @@ public class MediaPlayerService extends Service implements LocationListener {
 
 
 
-			if(calculaDistanciaInst(dLatitudeA,dLongitudeA,location.getLatitude(), location.getLongitude()) > 50) {
+			if(calculaDistanciaInst(dLatitudeA,dLongitudeA,location.getLatitude(), location.getLongitude()) > 20) {
 				Trace trace = new Trace();
 				trace.setData(new Date());
 				trace.setLongitude(location.getLongitude());
 				trace.setLatitude(location.getLatitude());
-				trace.setVelocidade((int) ((location.getSpeed()*3600)/1000));
+				trace.setVelocidade((speed*3600)/1000);
 				SugarRecord.save(trace);
-				//showNotification("Trace","Salvando=["+String.valueOf(location.getLatitude())+"]["+String.valueOf(location.getLongitude())+"]");
+				showNotification("Trace","Salvando=["+String.valueOf(location.getLatitude())+"]["+String.valueOf(location.getLongitude())+"]["+String.valueOf(trace.getVelocidade())+"]");
 			}
 
 			dLatitudeA = location.getLatitude();
@@ -163,15 +183,17 @@ public class MediaPlayerService extends Service implements LocationListener {
 				Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(), location.getLongitude(), dist);
 				if (dist[0] > distanciaDisparo) {
 					// builder.setColor(Color.BLUE);
-					builder.setContentTitle("Controle Remoto[Retorno ativado]");
-					int speed=(int) ((location.getSpeed()*3600)/1000);
-					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0])+"Velocidade. "+String.valueOf(speed)+"Km/h");
+					//Retorno ativado
+					builder.setContentTitle("Controle Remoto");
+
+					builder.setSubText("Distancia [" + String.format("%.0f", dist[0])+"] Velocidade [ "+String.valueOf(speed*3600/1000)+"Km/h]");
 					isAct = true;
 					isHouse = false;
 				} else {
-					builder.setContentTitle("Controle Remoto[Retorno desativado]");
-					int speed=(int) ((location.getSpeed()*3600)/1000);
-					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0])+"Velocidade. "+String.valueOf(speed)+"Km/h");
+					//Retorno desativado
+					builder.setContentTitle("Controle Remoto");
+
+					builder.setSubText("Distancia [" + String.format("%.0f", dist[0])+"] Velocidade ["+String.valueOf(speed*3600/1000)+"Km/h]");
 					if (isAct /*&& isHouse*/ && acionarDisparo) {
 						isAct = false;
 						cThreadOnline = new Thread(new ClientThreadOnline());
@@ -249,11 +271,14 @@ public class MediaPlayerService extends Service implements LocationListener {
 				if (locationManager != null) {
 					Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 					if (location != null) {
+
+						dLatitudeA = location.getLatitude();
+						dLongitudeA = location.getLongitude();
+
 						Geocoder geocoder;
 						List<Address> addresses;
 						geocoder = new Geocoder(this, Locale.getDefault());
 						try {
-							addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 							addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 							String rua = "";
 							String numero = "";
@@ -271,7 +296,7 @@ public class MediaPlayerService extends Service implements LocationListener {
 								enderecoCompleto = parametro.getCampo1();
 								dLatitude = address.getLatitude();
 								dLongitude = address.getLongitude();
-                                    parametroDAO.setChave("coordenadas_local",String.valueOf(dLatitude),String.valueOf(dLongitude) );
+								//parametroDAO.setChave("coordenadas_local",String.valueOf(dLatitude),String.valueOf(dLongitude) );
 
 
 								float[] dist = new float[1];
