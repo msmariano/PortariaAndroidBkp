@@ -348,13 +348,15 @@ public class MediaPlayerService extends Service implements LocationListener {
 
 		public void run() {
 			try {
-				showNotification("Portão", "Acionando");
-				InetAddress serverAddr = InetAddress.getByName(ipArduino);
-				Socket socket = new Socket(serverAddr, portaIpArduino);
-				connected = true;
-				boolean bEnviado = false;
-				int duration = Toast.LENGTH_SHORT;
-				if (connected) {
+                connected = true;
+                if (connected) {
+				    showNotification("Portão", "Acionando["+ipArduino+":"+String.valueOf(portaIpArduino)+"]");
+				    InetAddress serverAddr = InetAddress.getByName(ipArduino);
+				    Socket socket = new Socket(serverAddr, portaIpArduino);
+
+				    boolean bEnviado = false;
+				    int duration = Toast.LENGTH_SHORT;
+
 					try {
 						PrintWriter out = new PrintWriter(
 								new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
@@ -373,19 +375,25 @@ public class MediaPlayerService extends Service implements LocationListener {
 						} catch (IOException e) {
 							updateContext("Erro envio comando portão : " + e.getMessage());
 							showNotification("Comando do portao[1]", e.getMessage());
+                            connected = false;
 						}
 
 					} catch (Exception e) {
 						updateContext("Erro envio comando portão : " + e.getMessage());
 						showNotification("Comando do portao[2]", e.getMessage());
+                        connected = false;
 					}
-
+                    socket.close();
+                    showNotification("Portão", "Acionamento finalizado!");
+                    connected = false;
 				}
-				socket.close();
-				showNotification("Portão", "Acionamento finalizado!");
-				connected = false;
+				else
+                {
+                    showNotification("Portão", "Acionamento ainda executando...Aguarde!");
+                }
+
 			} catch (Exception e) {
-				showNotification("Comando do portao", "Sem conexao!!!");
+				showNotification("Comando do portao", "Sem conexao!!!["+e.getMessage()+"]");
 				connected = false;
 			}
 		}
