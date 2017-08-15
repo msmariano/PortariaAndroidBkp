@@ -57,6 +57,16 @@ public class Trace {
     private Double longitude;
     private Date data;
 
+    public Integer getVelocidade() {
+        return velocidade;
+    }
+
+    public void setVelocidade(Integer velocidade) {
+        this.velocidade = velocidade;
+    }
+
+    private Integer velocidade;
+
     public Trace(){
 
     }

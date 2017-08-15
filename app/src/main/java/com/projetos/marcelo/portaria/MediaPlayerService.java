@@ -71,7 +71,7 @@ public class MediaPlayerService extends Service implements LocationListener {
 	Socket socket;
 	PrintWriter out;
 	Thread cThreadOnline;
-	public double dLatitude, dLongitude;
+	public double dLatitude, dLongitude,dLatitudeA, dLongitudeA;
 	public Location org;
 	MediaPlayerService localObj;
 	String enderecoCompleto = "";
@@ -106,6 +106,13 @@ public class MediaPlayerService extends Service implements LocationListener {
         return dist[0];
     }
 
+	public float calculaDistanciaInst(Double a,Double b,Double c,Double d){
+		float[] dist = new float[1];
+		dist[0] = 0;
+		Location.distanceBetween(a, b, c, d, dist);
+		return dist[0];
+	}
+
 	@Override
 	public void onLocationChanged(Location location) {
 		Geocoder geocoder;
@@ -122,12 +129,21 @@ public class MediaPlayerService extends Service implements LocationListener {
 			if (addresses.get(0).getSubThoroughfare() != null)
 				numero = addresses.get(0).getSubThoroughfare();
 
-			Trace trace = new Trace();
-			trace.setData(new Date());
-			trace.setLongitude(location.getLongitude());
-			trace.setLatitude(location.getLatitude());
-            SugarRecord.save(trace);
 
+
+
+			if(calculaDistanciaInst(dLatitudeA,dLongitudeA,location.getLatitude(), location.getLongitude()) > 50) {
+				Trace trace = new Trace();
+				trace.setData(new Date());
+				trace.setLongitude(location.getLongitude());
+				trace.setLatitude(location.getLatitude());
+				trace.setVelocidade((int) ((location.getSpeed()*3600)/1000));
+				SugarRecord.save(trace);
+				//showNotification("Trace","Salvando=["+String.valueOf(location.getLatitude())+"]["+String.valueOf(location.getLongitude())+"]");
+			}
+
+			dLatitudeA = location.getLatitude();
+			dLongitudeA = location.getLongitude();
 
             if(calculaDistancia(location) <= distanciaDisparo){
 			//if ( enderecoCompleto.toLowerCase().equals( rua.trim().toLowerCase()+" "+numero.trim().toLowerCase())) {
@@ -148,12 +164,14 @@ public class MediaPlayerService extends Service implements LocationListener {
 				if (dist[0] > distanciaDisparo) {
 					// builder.setColor(Color.BLUE);
 					builder.setContentTitle("Controle Remoto[Retorno ativado]");
-					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
+					int speed=(int) ((location.getSpeed()*3600)/1000);
+					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0])+"Velocidade. "+String.valueOf(speed)+"Km/h");
 					isAct = true;
 					isHouse = false;
 				} else {
 					builder.setContentTitle("Controle Remoto[Retorno desativado]");
-					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
+					int speed=(int) ((location.getSpeed()*3600)/1000);
+					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0])+"Velocidade. "+String.valueOf(speed)+"Km/h");
 					if (isAct /*&& isHouse*/ && acionarDisparo) {
 						isAct = false;
 						cThreadOnline = new Thread(new ClientThreadOnline());
@@ -348,8 +366,9 @@ public class MediaPlayerService extends Service implements LocationListener {
 
 		public void run() {
 			try {
-                connected = true;
-                if (connected) {
+
+                if (!connected) {
+					connected = true;
 				    showNotification("Portão", "Acionando["+ipArduino+":"+String.valueOf(portaIpArduino)+"]");
 				    InetAddress serverAddr = InetAddress.getByName(ipArduino);
 				    Socket socket = new Socket(serverAddr, portaIpArduino);
