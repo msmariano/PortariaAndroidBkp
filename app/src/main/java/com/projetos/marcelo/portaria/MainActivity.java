@@ -20,6 +20,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orm.SugarContext;
+import com.orm.SugarRecord;
+import com.projetos.marcelo.portaria.model.Parametro;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -28,7 +32,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		context = getApplicationContext();
+		SugarContext.init( this );
 
 		if (ContextCompat.checkSelfPermission(this,
 				Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
@@ -76,6 +80,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 						MY_PERMISSIONS_REQUEST_SEND_SMS);
 			}
 		}
+
+		//teste criar base
+		try {
+			SugarRecord.deleteAll(Parametro.class);
+			ParametroDAO parametroDAO = new ParametroDAO();
+			parametroDAO.setChave("conexao_ip_arduino","192.168.0.14","81");
+			parametroDAO.setChave("ssid_local","Escritorio","");
+			parametroDAO.setChave("endereco_local","Rua Cyro Vellozo 56","Prado Velho");
+			parametroDAO.setChave("acionar_disparo","false","");
+			parametroDAO.setChave("distancia_disparo","150","");
+
+
+		}
+		catch(Exception e){
+			Toast.makeText(this, "Erro:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+		}
+
 
 		intent = new Intent(getApplicationContext(), MediaPlayerService.class);
 		intent.setAction(MediaPlayerService.ACTION_PLAY);
@@ -279,6 +300,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 		else if(v.equals(config)){
 			try {
+
+
+
 				ParametroDAO parametroDAO = new ParametroDAO();
 				List<Parametro> parametros = parametroDAO.listar();
 				if(parametros != null){

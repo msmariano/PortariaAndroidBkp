@@ -1,23 +1,17 @@
 package com.projetos.marcelo.portaria;
 
-import android.*;
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.media.MediaPlayer;
-import android.media.RingtoneManager;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
 import android.media.session.MediaSessionManager;
@@ -28,15 +22,15 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Looper;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 import android.widget.Toast;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+
+import com.orm.SugarRecord;
+import com.projetos.marcelo.portaria.model.Parametro;
+import com.projetos.marcelo.portaria.model.Trace;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -105,6 +99,13 @@ public class MediaPlayerService extends Service implements LocationListener {
 		}
 	}
 
+	public float calculaDistancia(Location location){
+        float[] dist = new float[1];
+        dist[0] = 0;
+        Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(), location.getLongitude(), dist);
+        return dist[0];
+    }
+
 	@Override
 	public void onLocationChanged(Location location) {
 		Geocoder geocoder;
@@ -125,9 +126,11 @@ public class MediaPlayerService extends Service implements LocationListener {
 			trace.setData(new Date());
 			trace.setLongitude(location.getLongitude());
 			trace.setLatitude(location.getLatitude());
-			trace.setEndereco(rua+" "+numero);
+            SugarRecord.save(trace);
 
-			if ( enderecoCompleto.toLowerCase().equals( rua.trim().toLowerCase()+" "+numero.trim().toLowerCase())) {
+
+            if(calculaDistancia(location) <= distanciaDisparo){
+			//if ( enderecoCompleto.toLowerCase().equals( rua.trim().toLowerCase()+" "+numero.trim().toLowerCase())) {
 				builder.setColor(Color.BLUE);
 				updateContext("" + rua + " " + numero);
 				isHouse = true;
@@ -151,7 +154,7 @@ public class MediaPlayerService extends Service implements LocationListener {
 				} else {
 					builder.setContentTitle("Controle Remoto[Retorno desativado]");
 					builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
-					if (isAct && isHouse && acionarDisparo) {
+					if (isAct /*&& isHouse*/ && acionarDisparo) {
 						isAct = false;
 						cThreadOnline = new Thread(new ClientThreadOnline());
 						cThreadOnline.start();
@@ -250,15 +253,15 @@ public class MediaPlayerService extends Service implements LocationListener {
 								enderecoCompleto = parametro.getCampo1();
 								dLatitude = address.getLatitude();
 								dLongitude = address.getLongitude();
-                                parametro.setParametros("coordenadas_local",String.valueOf(dLatitude),String.valueOf(dLongitude) );
-                                parametroDAO.salvar(parametro);
+                                    parametroDAO.setChave("coordenadas_local",String.valueOf(dLatitude),String.valueOf(dLongitude) );
+
 
 								float[] dist = new float[1];
 								dist[0] = 0;
 								Location.distanceBetween(dLatitude, dLongitude, location.getLatitude(),
 										location.getLongitude(), dist);
 								builder.setSubText("Distancia.:" + String.format("%.0f", dist[0]));
-								parametroDAO.fechar();
+
 							}
 
 						} catch (IOException e) {
@@ -449,6 +452,7 @@ public class MediaPlayerService extends Service implements LocationListener {
 	public void inicializacao() {
 
 		if (!isInit) {
+
 			// isInit = true;
 			try {
 
@@ -462,7 +466,7 @@ public class MediaPlayerService extends Service implements LocationListener {
 				if (parametro != null) {
 					ssidlocal = parametro.getCampo1();
 				}
-				parametroDAO.fechar();
+
 
 			} catch (Exception e) {
 				showNotification("Inicialização!", e.getMessage());

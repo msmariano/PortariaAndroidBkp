@@ -84,12 +84,12 @@
         "source": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "C:\\Users\\msmariano\\.android\\build-cache\\246377794250d5c87bf717753485c169fd907780\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
-    },
-    {
         "merged": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
         "source": "C:\\Users\\msmariano\\.android\\build-cache\\246377794250d5c87bf717753485c169fd907780\\output\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "C:\\Users\\msmariano\\.android\\build-cache\\246377794250d5c87bf717753485c169fd907780\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
         "merged": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
@@ -184,12 +184,12 @@
         "source": "C:\\Users\\msmariano\\.android\\build-cache\\246377794250d5c87bf717753485c169fd907780\\output\\res\\layout\\notification_template_part_time.xml"
     },
     {
-        "merged": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "C:\\Users\\msmariano\\.android\\build-cache\\246377794250d5c87bf717753485c169fd907780\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
-    },
-    {
         "merged": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
         "source": "C:\\Users\\msmariano\\.android\\build-cache\\246377794250d5c87bf717753485c169fd907780\\output\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "C:\\Users\\msmariano\\.android\\build-cache\\246377794250d5c87bf717753485c169fd907780\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
         "merged": "C:\\Users\\msmariano\\StudioProjects\\PortariaAndroidBkp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_header.xml",
