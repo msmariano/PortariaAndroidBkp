@@ -58,6 +58,8 @@ public class PrincipalActivity extends AppCompatActivity
         cbAcionar = (CheckBox) findViewById(R.id.cbAcionar);
         edImei = (EditText)findViewById(R.id.edIMEI);
 
+        edPortaArduino.setContentDescription("Porta do Arduino");
+
         edIpArduino = (EditText) findViewById(R.id.edIpArduino);
         btAtualizar = (Button)  findViewById(R.id.btAtualizar);
 

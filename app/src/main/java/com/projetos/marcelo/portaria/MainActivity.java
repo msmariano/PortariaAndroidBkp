@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		//teste criar base
 		try {
+			SugarRecord.deleteAll(Trace.class);
 			/*SugarRecord.deleteAll(Parametro.class);
 			SugarRecord.deleteAll(Trace.class);
 			ParametroDAO parametroDAO = new ParametroDAO();
